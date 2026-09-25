@@ -1,4 +1,6 @@
+import WorkoutProvider from "@/context/WorkoutProvider";
 import { Inter, Oswald } from "next/font/google";
+import Navbar from "./components/shared/Navbar";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -31,7 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${oswald.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <WorkoutProvider>
+          <Navbar />
+          <div>{children}</div>
+        </WorkoutProvider>
+      </body>
     </html>
   );
 }

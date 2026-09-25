@@ -1,20 +1,18 @@
 "use client";
-
-import { ReactNode, useEffect, useState } from "react";
 import WorkoutContext from "@/context/WorkoutContextData";
 import type { WorkoutType } from "@/types/workoutTypes";
+import { ReactNode, useEffect, useState } from "react";
 
 type WorkoutsProviderProps = {
   children: ReactNode;
 };
 
 const WorkoutProvider = ({ children }: WorkoutsProviderProps) => {
-
-/**
- * ==========================
- * Fetch Workouts Data
- * ==========================
- */
+  /**
+   * ==========================
+   * Fetch Workouts Data
+   * ==========================
+   */
   const [workouts, setWorkouts] = useState<WorkoutType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -24,7 +22,9 @@ const WorkoutProvider = ({ children }: WorkoutsProviderProps) => {
       setLoading(true);
       setError("");
 
-      const response = await fetch("https://api.abcz.workers.dev/api/fitlog", {cache: "force-cache"});
+      const response = await fetch("https://api.abcz.workers.dev/api/fitlog", {
+        cache: "force-cache",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch workouts");
@@ -45,11 +45,11 @@ const WorkoutProvider = ({ children }: WorkoutsProviderProps) => {
     void Promise.resolve().then(fetchWorkouts);
   }, []);
 
-/**
- * ==========================
- * Store Plan & Saved data using useState + Completed Tasks
- * ==========================
- */
+  /**
+   * ==========================
+   * Store Plan & Saved data using useState + Completed Tasks
+   * ==========================
+   */
 
   const [plan, setPlan] = useState<number[]>([]);
   const [saved, setSaved] = useState<number[]>([]);
@@ -57,19 +57,17 @@ const WorkoutProvider = ({ children }: WorkoutsProviderProps) => {
 
   return (
     <WorkoutContext.Provider
-      value={
-        {
-          workouts,
-          loading,
-          error,
-          plan,
-          saved,
-          setPlan,
-          setSaved,
-          completed,
-          setCompleted,
-        }
-      }
+      value={{
+        workouts,
+        loading,
+        error,
+        plan,
+        saved,
+        setPlan,
+        setSaved,
+        completed,
+        setCompleted,
+      }}
     >
       {children}
     </WorkoutContext.Provider>
