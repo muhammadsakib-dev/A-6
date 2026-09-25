@@ -43,7 +43,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-t border-zinc-800 bg-zinc-950 text-zinc-400 shadow-md">
+    <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950 text-zinc-400 shadow-md">
       <div className="navbar mx-auto min-h-22 max-w-375 px-4 sm:px-6 lg:px-8">
 
         {/* Logo / Mobile Menu */}

@@ -4,3 +4,6 @@
   /* themes: fitlog --default; */
 }
 
+html {
+  scroll-behavior: smooth;
+}
