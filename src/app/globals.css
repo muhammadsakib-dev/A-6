@@ -1,26 +1,55 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  /* themes: fitlog --default; */
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ================================
+     BRAND / PRIMARY
+     ================================ */
+
+  --primary: #c2f800;
+  --primary-bright: #ccff00;
+  --primary-dark: #6b870e;
+
+
+  /* ================================
+     BACKGROUND
+     ================================ */
+
+  --background: #000000;
+  --background-main: #0f1115;
+  --background-soft: #0c0d10;
+
+
+  /* ================================
+     SURFACE / CARD
+     ================================ */
+
+  --surface: #15171d;
+  --surface-alt: #101216;
+  --surface-soft: #13161d;
+
+
+  /* ================================
+     BORDER / DIVIDER
+     ================================ */
+
+  --border: #2e3138;
+  --border-light: #373a41;
+
+
+  /* ================================
+     TEXT
+     ================================ */
+
+  --text-primary: #ffffff;
+  --text-secondary: #c4c5c6;
+  --text-muted: #8a8b8e;
+  --text-subtle: #6b6d72;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
+
