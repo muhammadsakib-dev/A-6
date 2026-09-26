@@ -1,9 +1,8 @@
 "use client";
-
+import { Suspense, useMemo } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
-import { useMemo } from "react";
 
 import { useWorkout } from "@/context/WorkoutContextData";
 import SortControl from "@/app/components/myPlanComponent/SortControl";
@@ -152,7 +151,13 @@ const MyPlanLayout = ({
 
           {/* Sort */}
 
-          <SortControl />
+          <Suspense
+            fallback={
+              <div className="h-10 w-32 animate-pulse rounded-lg bg-zinc-800" />
+            }
+          >
+            <SortControl />
+          </Suspense>
         </section>
 
         {/* ==========================

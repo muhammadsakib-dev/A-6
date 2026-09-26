@@ -1,18 +1,25 @@
 "use client";
 
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { useWorkout } from "@/context/WorkoutContextData";
+
 import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
 import EmptyPlan from "@/app/components/myPlanComponent/EmptyPlan";
+
 import {
   sortWorkouts,
   type SortType,
 } from "@/app/components/myPlanComponent/sortWorkouts";
 
-const SavedPage = () => {
+/* =========================
+   Saved Page Content
+   ========================= */
+
+const SavedPageContent = () => {
   const searchParams = useSearchParams();
+
   const sortParam = searchParams.get("sort");
 
   const sort: SortType =
@@ -53,6 +60,25 @@ const SavedPage = () => {
         />
       ))}
     </div>
+  );
+};
+
+/* =========================
+   Saved Page
+   ========================= */
+
+const SavedPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="space-y-2.5">
+          <div className="h-28 animate-pulse rounded-2xl bg-zinc-900" />
+          <div className="h-28 animate-pulse rounded-2xl bg-zinc-900" />
+        </div>
+      }
+    >
+      <SavedPageContent />
+    </Suspense>
   );
 };
 
