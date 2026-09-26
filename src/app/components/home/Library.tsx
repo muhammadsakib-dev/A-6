@@ -8,9 +8,9 @@ const Library = () => {
 
   if (loading) {
     return (
-      <p className="text-(--color-text-muted)">
-        Loading workouts...
-      </p>
+      <div className="flex items-center justify-center">
+        <span className="loading loading-infinity loading-xl "></span>
+      </div>
     );
   }
 

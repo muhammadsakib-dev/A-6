@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="border-t border-(--color-border) bg-(--color-background)">
-      <div className="mx-auto flex min-h-27.5 max-w-362.5 items-center justify-between px-6 py-6 lg:px-8">
+      <div className="mx-auto flex min-h-27.5 max-w-375 items-center justify-between px-6 py-6 lg:px-8">
         <Link
           href="/"
           className="flex items-center gap-2 transition-opacity hover:opacity-80"

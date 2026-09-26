@@ -53,9 +53,9 @@ const WorkoutDetails = () => {
 
   if (loading) {
     return (
-      <main className="flex min-h-[calc(100vh-88px)] items-center justify-center px-4">
-        <p className="text-sm text-zinc-400">Loading workout...</p>
-      </main>
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-infinity loading-xl "></span>
+      </div>
     );
   }
 
