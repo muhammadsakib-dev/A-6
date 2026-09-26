@@ -1,10 +1,8 @@
-
-import type { WorkoutType } from "@/types/workoutTypes";
-
 import Image from "next/image";
 import Link from "next/link";
 import { FaFireFlameSimple } from "react-icons/fa6";
 import { FiClock, FiStar } from "react-icons/fi";
+import type { WorkoutType } from "@/types/workoutTypes";
 
 interface WorkoutCardProps {
   workout: WorkoutType;
@@ -42,7 +40,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
           {muscleGroups.map((muscle) => (
             <span
               key={muscle}
-              className="rounded-full bg-(--color-primary) px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-(--color-black)"
+              className="rounded-full bg-(--color-primary) px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-black"
             >
               {muscle}
             </span>
@@ -81,4 +79,3 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
 };
 
 export default WorkoutCard;
-

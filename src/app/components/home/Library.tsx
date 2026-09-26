@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useWorkout } from "@/context/WorkoutContextData";
@@ -8,19 +7,11 @@ const Library = () => {
   const { workouts, loading, error } = useWorkout();
 
   if (loading) {
-    return (
-      <p className="text-(--color-text-muted)">
-        Loading workouts...
-      </p>
-    );
+    return <p className="text-(--color-text-muted)">Loading workouts...</p>;
   }
 
   if (error) {
-    return (
-      <p className="text-(--color-error)">
-        {error}
-      </p>
-    );
+    return <p className="text-(--color-error)">{error}</p>;
   }
 
   return (
@@ -40,10 +31,7 @@ const Library = () => {
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {workouts.map((workout) => (
-          <WorkoutCard
-            key={workout.id}
-            workout={workout}
-          />
+          <WorkoutCard key={workout.id} workout={workout} />
         ))}
       </div>
     </div>
@@ -51,4 +39,3 @@ const Library = () => {
 };
 
 export default Library;
-

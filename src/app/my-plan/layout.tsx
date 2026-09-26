@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import type { ReactNode } from "react";
 import { useMemo } from "react";
 
 import { useWorkout } from "@/context/WorkoutContextData";
-
 import SortControl from "@/app/components/myPlanComponent/SortControl";
 
 const MyPlanLayout = ({
@@ -17,114 +15,106 @@ const MyPlanLayout = ({
 }>) => {
   const pathname = usePathname();
 
-  const {
-    workouts,
-    plan,
-    saved,
-  } = useWorkout();
+  const { workouts, plan, saved } = useWorkout();
 
-  const isTodayPlan =
-    pathname === "/my-plan/today-plan";
+  const isTodayPlan = pathname === "/my-plan/today-plan";
+  const isSaved = pathname === "/my-plan/saved";
 
-  const isSaved =
-    pathname === "/my-plan/saved";
-
-  /**
+  /*
    * ==========================
    * Current List
    * ==========================
    */
 
-  const currentIds =
-    isTodayPlan
-      ? plan
-      : isSaved
-        ? saved
-        : [];
-
-  /**
+  /*
    * ==========================
    * Current Workouts
    * ==========================
    */
 
   const currentWorkouts = useMemo(() => {
+    const currentIds = isTodayPlan ? plan : isSaved ? saved : [];
+
     return workouts.filter((workout) =>
       currentIds.includes(Number(workout.id)),
     );
-  }, [workouts, currentIds]);
+  }, [workouts, isTodayPlan, isSaved, plan, saved]);
 
-  /**
+  /*
    * ==========================
    * Stats
    * ==========================
    */
 
-  const totalExercises =
-    currentWorkouts.length;
+  const totalExercises = currentWorkouts.length;
 
-  const totalMinutes =
-    currentWorkouts.reduce(
-      (total, workout) =>
-        total + Number(workout.duration),
-      0,
-    );
+  const totalMinutes = currentWorkouts.reduce(
+    (total, workout) => total + Number(workout.duration),
+    0,
+  );
 
-  const totalCalories =
-    currentWorkouts.reduce(
-      (total, workout) =>
-        total +
-        Number(workout.caloriesBurned),
-      0,
-    );
+  const totalCalories = currentWorkouts.reduce(
+    (total, workout) => total + Number(workout.caloriesBurned),
+    0,
+  );
 
   return (
-    <main className="min-h-screen bg-[#0f1014] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#0f1014] px-4 py-8 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-375">
 
-        {/* Header */}
+        {/* ==========================
+            Header
+        ========================== */}
 
         <header>
           <h1 className="font-oswald text-3xl font-bold uppercase tracking-tight sm:text-4xl">
             My Plan
           </h1>
 
-          <p className="mt-1 text-[10px] text-zinc-500 sm:text-xs">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-500">
             Cap of five lifts for today. Finish them, then load more.
           </p>
         </header>
 
-        {/* Stats */}
+        {/* ==========================
+            Stats
+        ========================== */}
 
-        <section className="mt-4 overflow-hidden rounded-xl border border-zinc-800 bg-[#14171d]">
+        <section className="mt-6 overflow-hidden rounded-2xl border border-zinc-800 bg-[#14171d]">
           <div className="grid grid-cols-3">
 
-            <div className="px-4 py-10 sm:px-6">
-              <p className="text-[12px] uppercase tracking-wide text-zinc-500">
+            {/* Exercises */}
+
+            <div className="px-4 py-7 sm:px-7 sm:py-6">
+              <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
                 Exercises
               </p>
 
-              <p className="mt-1 font-oswald text-2xl font-bold leading-none text-lime-400 sm:text-5xl">
+              <p className="mt-2 font-oswald text-4xl font-bold leading-none text-lime-400 sm:text-5xl">
                 {totalExercises}
               </p>
             </div>
 
-            <div className="border-x border-zinc-800 px-4 py-10 sm:px-6">
-              <p className="text-[12px] uppercase tracking-wide text-zinc-500">
+            {/* Minutes */}
+
+            <div className="border-x border-zinc-800 px-4 py-7 sm:px-7 sm:py-6">
+              <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
                 Minutes
               </p>
 
-              <p className="mt-1 font-oswald text-2xl font-bold leading-none text-white sm:text-5xl">
+              <p className="mt-2 font-oswald text-4xl font-bold leading-none text-white sm:text-5xl">
                 {totalMinutes}
               </p>
             </div>
 
-            <div className="px-4 py-10 sm:px-6">
-              <p className="text-[12px] uppercase tracking-wide text-zinc-500">
+            {/* Calories */}
+
+            <div className="px-4 py-7 sm:px-7 sm:py-6">
+              <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
                 Calories
               </p>
 
-              <p className="mt-1 font-oswald text-2xl font-bold leading-none text-white sm:text-5xl">
+              <p className="mt-2 font-oswald text-4xl font-bold leading-none text-white sm:text-5xl">
                 {totalCalories}
               </p>
             </div>
@@ -132,17 +122,19 @@ const MyPlanLayout = ({
           </div>
         </section>
 
-        {/* Tabs + Sort */}
+        {/* ==========================
+            Tabs + Sort
+        ========================== */}
 
-        <section className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <section className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
           {/* Tabs */}
 
-          <div className="flex items-center rounded-lg border border-zinc-800 bg-[#14171d] p-2">
+          <div className="flex w-fit items-center rounded-xl border border-zinc-800 bg-[#14171d] p-1.5">
 
             <Link
               href="/my-plan/today-plan"
-              className={`rounded-md px-3 py-1.5 text-[14px] font-medium transition ${
+              className={`rounded-lg px-4 py-1.5 text-sm font-medium transition ${
                 isTodayPlan
                   ? "bg-zinc-800 text-white"
                   : "text-zinc-500 hover:text-zinc-300"
@@ -153,7 +145,7 @@ const MyPlanLayout = ({
 
             <Link
               href="/my-plan/saved"
-              className={`rounded-md px-3 py-1.5 text-[14px] font-medium transition ${
+              className={`rounded-lg px-4 py-1.5 text-sm font-medium transition ${
                 isSaved
                   ? "bg-zinc-800 text-white"
                   : "text-zinc-500 hover:text-zinc-300"
@@ -170,9 +162,11 @@ const MyPlanLayout = ({
 
         </section>
 
-        {/* Page Content */}
+        {/* ==========================
+            Page Content
+        ========================== */}
 
-        <section className="mt-4">
+        <section className="mt-6">
           {children}
         </section>
 

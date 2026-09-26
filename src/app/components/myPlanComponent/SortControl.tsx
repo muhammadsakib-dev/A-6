@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const SortControl = () => {
   const router = useRouter();
@@ -10,11 +10,8 @@ const SortControl = () => {
 
   const currentSort = searchParams.get("sort") ?? "duration";
 
-  const handleSortChange = (
-    event: ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-
     const params = new URLSearchParams(searchParams.toString());
 
     params.set("sort", value);
@@ -26,9 +23,7 @@ const SortControl = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-[12px] text-zinc-500">
-        Sort By
-      </span>
+      <span className="text-[14px] text-zinc-500">Sort By</span>
 
       <select
         value={currentSort}
@@ -36,8 +31,8 @@ const SortControl = () => {
         className="h-7 rounded-md border border-zinc-800 bg-[#14171d] px-4 text-[14px] text-zinc-300 outline-none"
       >
         <option value="duration">Duration</option>
-        <option  value="calories">Calories</option>
-        <option  value="rating">Rating</option>
+        <option value="calories">Calories</option>
+        <option value="rating">Rating</option>
       </select>
     </div>
   );

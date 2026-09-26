@@ -15,7 +15,6 @@ const Footer = () => {
             width={24}
             height={24}
           />
-
           <span className="font-oswald text-2xl font-bold tracking-wide text-(--color-text-primary)">
             FITLOG
           </span>

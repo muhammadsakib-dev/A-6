@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -66,4 +65,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

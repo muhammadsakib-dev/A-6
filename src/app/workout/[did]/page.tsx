@@ -6,16 +6,11 @@ import {
   FiCalendar,
   FiCheck,
 } from "react-icons/fi";
-
 import { useWorkout } from "@/context/WorkoutContextData";
-
 import { useParams } from "next/navigation";
-
 import Image from "next/image";
 import Link from "next/link";
-
 import { toast } from "react-toastify";
-
 import type { WorkoutType } from "@/types/workoutTypes";
 
 const WorkoutDetails = () => {
@@ -36,7 +31,7 @@ const WorkoutDetails = () => {
   const isInPlan = plan.includes(workoutId);
   const isSaved = saved.includes(workoutId);
 
-  /**
+  /*
    * ==========================
    * Add Workout To Plan
    * ==========================
@@ -53,7 +48,7 @@ const WorkoutDetails = () => {
     toast.success("Workout added to today's plan.");
   };
 
-  /**
+  /*
    * ==========================
    * Save Workout
    * ==========================
@@ -70,7 +65,7 @@ const WorkoutDetails = () => {
     toast.success("Workout saved successfully.");
   };
 
-  /**
+  /*
    * ==========================
    * Loading State
    * ==========================
@@ -86,7 +81,7 @@ const WorkoutDetails = () => {
     );
   }
 
-  /**
+  /*
    * ==========================
    * Error State
    * ==========================
@@ -95,12 +90,14 @@ const WorkoutDetails = () => {
   if (error) {
     return (
       <main className="flex min-h-[calc(100vh-88px)] items-center justify-center px-4">
-        <p className="text-sm text-red-400">{error}</p>
+        <p className="text-sm text-red-400">
+          {error}
+        </p>
       </main>
     );
   }
 
-  /**
+  /*
    * ==========================
    * Find Workout
    * ==========================
@@ -113,14 +110,14 @@ const WorkoutDetails = () => {
 
   if (!workout) {
     return (
-      <main className="flex min-h-[calc(100vh-88px)] flex-col items-center justify-center gap-4">
-        <h1 className="font-oswald text-3xl uppercase text-white">
+      <main className="flex min-h-[calc(100vh-88px)] flex-col items-center justify-center gap-5 px-4">
+        <h1 className="font-oswald text-3xl font-bold uppercase text-white sm:text-4xl">
           Workout not found
         </h1>
 
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm text-lime-400 transition hover:text-lime-300"
+          className="inline-flex items-center gap-2 text-sm font-medium text-lime-400 transition hover:text-lime-300"
         >
           <FiArrowLeft />
           Back to workouts
@@ -130,13 +127,32 @@ const WorkoutDetails = () => {
   }
 
   return (
-    <main className="px-4 py-8 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#0f1014] px-4 py-8 text-white sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto max-w-300">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
 
-          {/* Image */}
+        {/* ==========================
+            Back Navigation
+        ========================== */}
 
-          <div className="relative aspect-[0.82] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 lg:aspect-auto lg:min-h-152.5">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-white"
+        >
+          <FiArrowLeft />
+          Back to workouts
+        </Link>
+
+        {/* ==========================
+            Main Content
+        ========================== */}
+
+        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-10">
+
+          {/* ==========================
+              Workout Image
+          ========================== */}
+
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-zinc-800 bg-[#14171d] sm:aspect-[16/10] lg:sticky lg:top-6 lg:aspect-auto lg:h-160">
             <Image
               src={workout.image}
               alt={workout.name}
@@ -147,34 +163,45 @@ const WorkoutDetails = () => {
             />
           </div>
 
-          {/* Content */}
+          {/* ==========================
+              Workout Content
+          ========================== */}
 
           <div className="flex flex-col">
 
-            <h1 className="font-oswald text-4xl font-bold uppercase leading-none tracking-tight text-white sm:text-5xl">
+            {/* Title */}
+
+            <h1 className="font-oswald text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {workout.name}
             </h1>
 
-            <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-400 sm:text-base">
+            {/* Description */}
+
+            <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base">
               {workout.description}
             </p>
 
-            {/* Muscle Groups */}
+            {/* ==========================
+                Muscle Groups
+            ========================== */}
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {workout.muscleGroups.map((muscle) => (
                 <span
                   key={muscle}
-                  className="rounded-full bg-lime-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-black"
+                  className="rounded-full bg-lime-400 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-black"
                 >
                   {muscle}
                 </span>
               ))}
             </div>
 
-            {/* Workout Details */}
+            {/* ==========================
+                Workout Details
+            ========================== */}
 
-            <div className="mt-5 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
+            <div className="mt-7 overflow-hidden rounded-2xl border border-zinc-800 bg-[#14171d]">
+
               <DetailRow
                 label="Equipment"
                 value={workout.equipment}
@@ -207,26 +234,30 @@ const WorkoutDetails = () => {
 
               <DetailRow
                 label="Rating"
-                value={String(workout.rating)}
+                value={`★ ${workout.rating}`}
               />
+
             </div>
 
-            {/* Instructions */}
+            {/* ==========================
+                Instructions
+            ========================== */}
 
-            <div className="mt-6">
-              <h2 className="text-sm font-bold uppercase tracking-wide text-white">
+            <div className="mt-8">
+
+              <h2 className="font-oswald text-xl font-bold uppercase tracking-wide text-white">
                 Instructions
               </h2>
 
-              <ol className="mt-4 space-y-3">
+              <ol className="mt-5 space-y-4">
                 {workout.instructions.map(
                   (instruction, index) => (
                     <li
                       key={`${workout.id}-${index}`}
-                      className="flex gap-3 text-sm leading-6 text-zinc-400"
+                      className="flex gap-4 text-sm leading-7 text-zinc-400 sm:text-base"
                     >
-                      <span className="shrink-0 text-zinc-500">
-                        {index + 1}.
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-xs font-bold text-lime-400">
+                        {index + 1}
                       </span>
 
                       <span>{instruction}</span>
@@ -234,11 +265,14 @@ const WorkoutDetails = () => {
                   ),
                 )}
               </ol>
+
             </div>
 
-            {/* Actions */}
+            {/* ==========================
+                Actions
+            ========================== */}
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
 
               {/* Add To Plan */}
 
@@ -246,7 +280,7 @@ const WorkoutDetails = () => {
                 type="button"
                 onClick={handleAddToPlan}
                 disabled={isInPlan}
-                className={`inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-semibold transition ${
+                className={`inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition ${
                   isInPlan
                     ? "cursor-not-allowed bg-zinc-700 text-zinc-400"
                     : "bg-lime-400 text-black hover:bg-lime-300"
@@ -265,7 +299,7 @@ const WorkoutDetails = () => {
                 type="button"
                 onClick={handleSaveWorkout}
                 disabled={isSaved}
-                className={`inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-semibold transition ${
+                className={`inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition ${
                   isSaved
                     ? "cursor-not-allowed bg-zinc-700 text-zinc-400"
                     : "bg-zinc-800 text-white hover:bg-zinc-700"
@@ -273,9 +307,13 @@ const WorkoutDetails = () => {
               >
                 {isSaved ? <FiCheck /> : <FiBookmark />}
 
-                {isSaved ? "Already saved" : "Save workout"}
+                {isSaved
+                  ? "Already saved"
+                  : "Save workout"}
               </button>
+
             </div>
+
           </div>
         </div>
       </div>
@@ -299,14 +337,16 @@ const DetailRow = ({
   value,
 }: DetailRowProps) => {
   return (
-    <div className="flex min-h-11.75 items-center justify-between border-b border-zinc-800 px-4 last:border-b-0">
-      <span className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+    <div className="flex min-h-14 items-center justify-between gap-4 border-b border-zinc-800 px-5 last:border-b-0 sm:px-6">
+
+      <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">
         {label}
       </span>
 
-      <span className="text-sm text-zinc-200">
+      <span className="text-sm font-medium text-zinc-200 sm:text-base">
         {value}
       </span>
+
     </div>
   );
 };

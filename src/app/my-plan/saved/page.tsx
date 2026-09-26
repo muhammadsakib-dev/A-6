@@ -4,20 +4,15 @@ import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { useWorkout } from "@/context/WorkoutContextData";
-
 import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
-
+import EmptyPlan from "@/app/components/myPlanComponent/EmptyPlan";
 import {
   sortWorkouts,
   type SortType,
 } from "@/app/components/myPlanComponent/sortWorkouts";
 
-import EmptyPlan from "@/app/components/myPlanComponent/EmptyPlan";
-
-
 const SavedPage = () => {
   const searchParams = useSearchParams();
-
   const sortParam = searchParams.get("sort");
 
   const sort: SortType =
@@ -44,11 +39,7 @@ const SavedPage = () => {
   };
 
   if (savedWorkouts.length === 0) {
-    return (
-    
-        <EmptyPlan/>
-      
-    );
+    return <EmptyPlan />;
   }
 
   return (
