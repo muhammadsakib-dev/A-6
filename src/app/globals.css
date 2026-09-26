@@ -2,153 +2,27 @@
 
 @plugin "daisyui";
 
-/* =========================
-   Root Variables
-   ========================= */
-
 :root {
-  /* =========================
-     Brand Colors
-     ========================= */
-
   --color-primary: #c2f800;
-  --color-primary-dark: #9dcc00;
   --color-primary-light: #d9ff66;
-
-  --color-secondary: #f97316;
-  --color-secondary-dark: #ea580c;
-  --color-secondary-light: #fb923c;
-
-  --color-accent: #ec4899;
-  --color-accent-dark: #db2777;
-  --color-accent-light: #f472b6;
-
-  /* =========================
-     Gradients
-     ========================= */
-
-  --gradient-primary: linear-gradient(
-    90deg,
-    #f97316 0%,
-    #ec4899 100%
-  );
-
-  --gradient-brand: linear-gradient(
-    135deg,
-    #c2f800 0%,
-    #84cc16 45%,
-    #22c55e 100%
-  );
-
-  --gradient-dark: linear-gradient(
-    135deg,
-    #09090b 0%,
-    #18181b 100%
-  );
-
-  /* =========================
-     Background
-     ========================= */
 
   --color-background: #09090b;
   --color-background-secondary: #18181b;
-  --color-background-tertiary: #27272a;
-
   --color-surface: #18181b;
-  --color-surface-hover: #27272a;
-  --color-surface-active: #3f3f46;
-
-  /* =========================
-     Text
-     ========================= */
 
   --color-text-primary: #ffffff;
-  --color-text-secondary: #d4d4d8;
   --color-text-muted: #a1a1aa;
   --color-text-subtle: #71717a;
-  --color-text-disabled: #52525b;
-
-  /* =========================
-     Border
-     ========================= */
 
   --color-border: #27272a;
   --color-border-light: #3f3f46;
-  --color-border-dark: #18181b;
-  --color-border-focus: #c2f800;
-
-  /* =========================
-     Status
-     ========================= */
-
-  --color-success: #22c55e;
-  --color-success-dark: #16a34a;
-  --color-success-light: #86efac;
-
-  --color-warning: #f59e0b;
-  --color-warning-dark: #d97706;
-  --color-warning-light: #fcd34d;
 
   --color-error: #ef4444;
-  --color-error-dark: #dc2626;
-  --color-error-light: #fca5a5;
 
-  --color-info: #3b82f6;
-  --color-info-dark: #2563eb;
-  --color-info-light: #93c5fd;
-
-  /* =========================
-     Common Colors
-     ========================= */
+  --color-orange: #f97316;
+  --color-yellow: #eab308;
 
   --color-black: #000000;
-  --color-white: #ffffff;
-
-  --color-red: #ef4444;
-  --color-orange: #f97316;
-  --color-amber: #f59e0b;
-  --color-yellow: #eab308;
-  --color-lime: #84cc16;
-  --color-green: #22c55e;
-  --color-emerald: #10b981;
-  --color-teal: #14b8a6;
-  --color-cyan: #06b6d4;
-  --color-sky: #0ea5e9;
-  --color-blue: #3b82f6;
-  --color-indigo: #6366f1;
-  --color-violet: #8b5cf6;
-  --color-purple: #a855f7;
-  --color-fuchsia: #d946ef;
-  --color-pink: #ec4899;
-  --color-rose: #f43f5e;
-
-  /* =========================
-     Neutral Scale
-     ========================= */
-
-  --color-zinc-50: #fafafa;
-  --color-zinc-100: #f4f4f5;
-  --color-zinc-200: #e4e4e7;
-  --color-zinc-300: #d4d4d8;
-  --color-zinc-400: #a1a1aa;
-  --color-zinc-500: #71717a;
-  --color-zinc-600: #52525b;
-  --color-zinc-700: #3f3f46;
-  --color-zinc-800: #27272a;
-  --color-zinc-900: #18181b;
-  --color-zinc-950: #09090b;
-
-  /* =========================
-     Overlay
-     ========================= */
-
-  --color-overlay-light: rgb(255 255 255 / 0.08);
-  --color-overlay-medium: rgb(255 255 255 / 0.12);
-  --color-overlay-dark: rgb(0 0 0 / 0.5);
-
-  /* =========================
-     Components
-     ========================= */
 
   --navbar-background: var(--color-background);
   --navbar-border: var(--color-border);
@@ -156,19 +30,11 @@
   --button-primary-background: var(--color-primary);
   --button-primary-text: var(--color-black);
 
-  --button-secondary-background: var(--color-secondary);
-  --button-secondary-text: var(--color-white);
-
   --badge-background: var(--color-primary);
   --badge-text: var(--color-black);
 
   --card-background: var(--color-surface);
-  --card-border: var(--color-border);
 }
-
-/* =========================
-   Global
-   ========================= */
 
 html {
   scroll-behavior: smooth;

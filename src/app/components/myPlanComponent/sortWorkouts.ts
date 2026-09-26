@@ -9,14 +9,14 @@ export const sortWorkouts = (
   return [...workouts].sort((a, b) => {
     switch (sort) {
       case "calories":
-        return Number(a.caloriesBurned) - Number(b.caloriesBurned);
+        return Number(b.caloriesBurned) - Number(a.caloriesBurned);
 
       case "rating":
-        return Number(a.rating) - Number(b.rating);
+        return Number(b.rating) - Number(a.rating);
 
       case "duration":
       default:
-        return Number(a.duration) - Number(b.duration);
+        return Number(b.duration) - Number(a.duration);
     }
   });
 };

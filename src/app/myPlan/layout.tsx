@@ -1,11 +1,12 @@
 "use client";
+
 import { Suspense, useMemo } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useWorkout } from "@/context/WorkoutContextData";
 import SortControl from "@/app/components/myPlanComponent/SortControl";
+import { useWorkout } from "@/context/WorkoutContextData";
 
 const MyPlanLayout = ({
   children,
@@ -13,23 +14,10 @@ const MyPlanLayout = ({
   children: ReactNode;
 }>) => {
   const pathname = usePathname();
-
   const { workouts, plan, saved } = useWorkout();
 
   const isTodayPlan = pathname === "/myPlan/todayPlan";
   const isSaved = pathname === "/myPlan/saved";
-
-  /*
-   * ==========================
-   * Current List
-   * ==========================
-   */
-
-  /*
-   * ==========================
-   * Current Workouts
-   * ==========================
-   */
 
   const currentWorkouts = useMemo(() => {
     const currentIds = isTodayPlan ? plan : isSaved ? saved : [];
@@ -38,12 +26,6 @@ const MyPlanLayout = ({
       currentIds.includes(Number(workout.id)),
     );
   }, [workouts, isTodayPlan, isSaved, plan, saved]);
-
-  /*
-   * ==========================
-   * Stats
-   * ==========================
-   */
 
   const totalExercises = currentWorkouts.length;
 
@@ -60,10 +42,6 @@ const MyPlanLayout = ({
   return (
     <main className="min-h-screen bg-[#0f1014] px-4 py-8 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-375">
-        {/* ==========================
-            Header
-        ========================== */}
-
         <header>
           <h1 className="font-oswald text-3xl font-bold uppercase tracking-tight sm:text-4xl">
             My Plan
@@ -74,14 +52,8 @@ const MyPlanLayout = ({
           </p>
         </header>
 
-        {/* ==========================
-            Stats
-        ========================== */}
-
         <section className="mt-6 overflow-hidden rounded-2xl border border-zinc-800 bg-[#14171d]">
           <div className="grid grid-cols-3">
-            {/* Exercises */}
-
             <div className="px-4 py-7 sm:px-7 sm:py-6">
               <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
                 Exercises
@@ -92,8 +64,6 @@ const MyPlanLayout = ({
               </p>
             </div>
 
-            {/* Minutes */}
-
             <div className="border-x border-zinc-800 px-4 py-7 sm:px-7 sm:py-6">
               <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
                 Minutes
@@ -103,8 +73,6 @@ const MyPlanLayout = ({
                 {totalMinutes}
               </p>
             </div>
-
-            {/* Calories */}
 
             <div className="px-4 py-7 sm:px-7 sm:py-6">
               <p className="text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">
@@ -118,13 +86,7 @@ const MyPlanLayout = ({
           </div>
         </section>
 
-        {/* ==========================
-            Tabs + Sort
-        ========================== */}
-
         <section className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          {/* Tabs */}
-
           <div className="flex w-fit items-center rounded-xl border border-zinc-800 bg-[#14171d] p-1.5">
             <Link
               href="/myPlan/todayPlan"
@@ -149,8 +111,6 @@ const MyPlanLayout = ({
             </Link>
           </div>
 
-          {/* Sort */}
-
           <Suspense
             fallback={
               <div className="h-10 w-32 animate-pulse rounded-lg bg-zinc-800" />
@@ -160,10 +120,6 @@ const MyPlanLayout = ({
           </Suspense>
         </section>
 
-        {/* ==========================
-            Page Content
-        ========================== */}
-
         <section className="mt-6">{children}</section>
       </div>
     </main>
@@ -171,3 +127,4 @@ const MyPlanLayout = ({
 };
 
 export default MyPlanLayout;
+

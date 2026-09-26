@@ -3,23 +3,16 @@
 import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { useWorkout } from "@/context/WorkoutContextData";
-
-import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
 import EmptyPlan from "@/app/components/myPlanComponent/EmptyPlan";
-
+import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
 import {
   sortWorkouts,
   type SortType,
 } from "@/app/components/myPlanComponent/sortWorkouts";
-
-/* =========================
-   Saved Page Content
-   ========================= */
+import { useWorkout } from "@/context/WorkoutContextData";
 
 const SavedPageContent = () => {
   const searchParams = useSearchParams();
-
   const sortParam = searchParams.get("sort");
 
   const sort: SortType =
@@ -62,10 +55,6 @@ const SavedPageContent = () => {
     </div>
   );
 };
-
-/* =========================
-   Saved Page
-   ========================= */
 
 const SavedPage = () => {
   return (

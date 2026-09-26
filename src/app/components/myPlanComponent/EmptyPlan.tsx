@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 const EmptyPlan = () => {
   return (
     <div className="flex min-h-95 flex-col items-center justify-center rounded-2xl border border-dashed border-(--color-border) bg-(--color-background) px-6 py-12 text-center">

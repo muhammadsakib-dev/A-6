@@ -3,23 +3,16 @@
 import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { useWorkout } from "@/context/WorkoutContextData";
-
-import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
 import EmptyPlan from "@/app/components/myPlanComponent/EmptyPlan";
-
+import MyPlanWorkoutCard from "@/app/components/myPlanComponent/MyPlanWorkoutCard";
 import {
   sortWorkouts,
   type SortType,
 } from "@/app/components/myPlanComponent/sortWorkouts";
-
-/* =========================
-   Today Plan Page Content
-   ========================= */
+import { useWorkout } from "@/context/WorkoutContextData";
 
 const TodayPlanPageContent = () => {
   const searchParams = useSearchParams();
-
   const sortParam = searchParams.get("sort");
 
   const sort: SortType =
@@ -29,13 +22,7 @@ const TodayPlanPageContent = () => {
       ? sortParam
       : "duration";
 
-  const {
-    workouts,
-    plan,
-    completed,
-    setPlan,
-    setCompleted,
-  } = useWorkout();
+  const { workouts, plan, completed, setPlan, setCompleted } = useWorkout();
 
   const todayWorkouts = useMemo(() => {
     const filteredWorkouts = workouts.filter((workout) =>
@@ -56,10 +43,7 @@ const TodayPlanPageContent = () => {
       return;
     }
 
-    setCompleted((currentCompleted) => [
-      ...currentCompleted,
-      id,
-    ]);
+    setCompleted((currentCompleted) => [...currentCompleted, id]);
   };
 
   if (todayWorkouts.length === 0) {
@@ -86,10 +70,6 @@ const TodayPlanPageContent = () => {
     </div>
   );
 };
-
-/* =========================
-   Today Plan Page
-   ========================= */
 
 const TodayPlanPage = () => {
   return (

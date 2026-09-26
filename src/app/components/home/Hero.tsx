@@ -46,7 +46,7 @@ const Hero = () => {
             width={480}
             height={480}
             priority
-            className="h-auto w-[85%] max-w-100 object-contain"
+            className="h-auto w-[90%] max-w-100 object-contain"
           />
         </div>
 

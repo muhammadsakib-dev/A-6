@@ -1,13 +1,17 @@
 "use client";
 
-import { useWorkout } from "@/context/WorkoutContextData";
 import WorkoutCard from "@/app/components/home/WorkoutCard";
+import { useWorkout } from "@/context/WorkoutContextData";
 
 const Library = () => {
   const { workouts, loading, error } = useWorkout();
 
   if (loading) {
-    return <p className="text-(--color-text-muted)">Loading workouts...</p>;
+    return (
+      <p className="text-(--color-text-muted)">
+        Loading workouts...
+      </p>
+    );
   }
 
   if (error) {

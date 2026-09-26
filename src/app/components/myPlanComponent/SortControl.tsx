@@ -23,12 +23,12 @@ const SortControl = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-[14px] text-zinc-500">Sort By</span>
+      <span className="text-sm text-zinc-500">Sort By</span>
 
       <select
         value={currentSort}
         onChange={handleSortChange}
-        className="h-7 rounded-md border border-zinc-800 bg-[#14171d] px-4 text-[14px] text-zinc-300 outline-none"
+        className="h-7 rounded-md border border-zinc-800 bg-[#14171d] px-4 text-sm text-zinc-300 outline-none"
       >
         <option value="duration">Duration</option>
         <option value="calories">Calories</option>

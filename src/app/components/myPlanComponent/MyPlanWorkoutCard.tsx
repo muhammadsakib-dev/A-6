@@ -39,8 +39,8 @@ const MyPlanWorkoutCard = ({
           src={workout.image}
           alt={workout.name}
           fill
-          className="object-cover"
           sizes="144px"
+          className="object-cover"
         />
       </div>
 
