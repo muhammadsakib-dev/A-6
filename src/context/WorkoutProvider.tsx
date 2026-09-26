@@ -70,7 +70,7 @@ const WorkoutProvider = ({ children }: WorkoutsProviderProps) => {
         setError("");
 
         const response = await fetch(
-          "https://api.abcz.workers.dev/api/fitlog",
+          "https://api.api-store.workers.dev/api/fitlog",
           {
             cache: "force-cache",
           },
