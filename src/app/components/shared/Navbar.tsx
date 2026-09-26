@@ -18,7 +18,7 @@ const Navbar = () => {
   const inactiveNavStyle =
     "text-(--color-text-muted) hover:border-(--color-primary)/30 hover:bg-transparent hover:text-(--color-text-primary)";
 
-  const isMyPlan = pathname.startsWith("/my-plan");
+  const isMyPlan = pathname.startsWith("/myPlan");
 
   const navItems = (
     <>
@@ -35,7 +35,7 @@ const Navbar = () => {
 
       <li>
         <Link
-          href="/my-plan/today-plan"
+          href="/myPlan/today-plan"
           className={`${navItemStyle} ${
             isMyPlan ? activeNavStyle : inactiveNavStyle
           }`}
@@ -107,7 +107,7 @@ const Navbar = () => {
 
         <div className="navbar-end gap-1 sm:gap-3">
           <Link
-            href="/my-plan/today-plan"
+            href="/myPlan/today-plan"
             className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-(--color-text-muted) transition-colors hover:text-(--color-text-primary) sm:px-3"
           >
             <span>Plan</span>
@@ -117,7 +117,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/my-plan/saved"
+            href="/myPlan/saved"
             className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-(--color-text-muted) transition-colors hover:text-(--color-text-primary) sm:px-3"
           >
             <span>Saved</span>

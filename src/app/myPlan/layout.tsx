@@ -17,8 +17,8 @@ const MyPlanLayout = ({
 
   const { workouts, plan, saved } = useWorkout();
 
-  const isTodayPlan = pathname === "/my-plan/today-plan";
-  const isSaved = pathname === "/my-plan/saved";
+  const isTodayPlan = pathname === "/myPlan/today-plan";
+  const isSaved = pathname === "/myPlan/saved";
 
   /*
    * ==========================
@@ -61,7 +61,6 @@ const MyPlanLayout = ({
   return (
     <main className="min-h-screen bg-[#0f1014] px-4 py-8 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-375">
-
         {/* ==========================
             Header
         ========================== */}
@@ -82,7 +81,6 @@ const MyPlanLayout = ({
 
         <section className="mt-6 overflow-hidden rounded-2xl border border-zinc-800 bg-[#14171d]">
           <div className="grid grid-cols-3">
-
             {/* Exercises */}
 
             <div className="px-4 py-7 sm:px-7 sm:py-6">
@@ -118,7 +116,6 @@ const MyPlanLayout = ({
                 {totalCalories}
               </p>
             </div>
-
           </div>
         </section>
 
@@ -127,13 +124,11 @@ const MyPlanLayout = ({
         ========================== */}
 
         <section className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
           {/* Tabs */}
 
           <div className="flex w-fit items-center rounded-xl border border-zinc-800 bg-[#14171d] p-1.5">
-
             <Link
-              href="/my-plan/today-plan"
+              href="/myPlan/today-plan"
               className={`rounded-lg px-4 py-1.5 text-sm font-medium transition ${
                 isTodayPlan
                   ? "bg-zinc-800 text-white"
@@ -144,7 +139,7 @@ const MyPlanLayout = ({
             </Link>
 
             <Link
-              href="/my-plan/saved"
+              href="/myPlan/saved"
               className={`rounded-lg px-4 py-1.5 text-sm font-medium transition ${
                 isSaved
                   ? "bg-zinc-800 text-white"
@@ -153,23 +148,18 @@ const MyPlanLayout = ({
             >
               Saved
             </Link>
-
           </div>
 
           {/* Sort */}
 
           <SortControl />
-
         </section>
 
         {/* ==========================
             Page Content
         ========================== */}
 
-        <section className="mt-6">
-          {children}
-        </section>
-
+        <section className="mt-6">{children}</section>
       </div>
     </main>
   );
