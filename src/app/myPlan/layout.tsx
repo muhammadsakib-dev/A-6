@@ -17,7 +17,7 @@ const MyPlanLayout = ({
 
   const { workouts, plan, saved } = useWorkout();
 
-  const isTodayPlan = pathname === "/myPlan/today-plan";
+  const isTodayPlan = pathname === "/myPlan/todayPlan";
   const isSaved = pathname === "/myPlan/saved";
 
   /*
@@ -128,7 +128,7 @@ const MyPlanLayout = ({
 
           <div className="flex w-fit items-center rounded-xl border border-zinc-800 bg-[#14171d] p-1.5">
             <Link
-              href="/myPlan/today-plan"
+              href="/myPlan/todayPlan"
               className={`rounded-lg px-4 py-1.5 text-sm font-medium transition ${
                 isTodayPlan
                   ? "bg-zinc-800 text-white"

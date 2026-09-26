@@ -35,7 +35,7 @@ const Navbar = () => {
 
       <li>
         <Link
-          href="/myPlan/today-plan"
+          href="/myPlan/todayPlan"
           className={`${navItemStyle} ${
             isMyPlan ? activeNavStyle : inactiveNavStyle
           }`}
@@ -107,7 +107,7 @@ const Navbar = () => {
 
         <div className="navbar-end gap-1 sm:gap-3">
           <Link
-            href="/myPlan/today-plan"
+            href="/myPlan/todayPlan"
             className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-(--color-text-muted) transition-colors hover:text-(--color-text-primary) sm:px-3"
           >
             <span>Plan</span>
