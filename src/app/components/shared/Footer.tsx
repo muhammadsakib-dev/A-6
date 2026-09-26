@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-zinc-800 bg-zinc-950">
+    <footer className="border-t border-(--color-border) bg-(--color-background)">
       <div className="mx-auto flex min-h-27.5 max-w-362.5 items-center justify-between px-6 py-6 lg:px-8">
         <Link
           href="/"
@@ -16,12 +16,12 @@ const Footer = () => {
             height={24}
           />
 
-          <span className="font-oswald text-2xl font-bold tracking-wide text-white ">
+          <span className="font-oswald text-2xl font-bold tracking-wide text-(--color-text-primary)">
             FITLOG
           </span>
         </Link>
 
-        <p className="text-right text-sm text-zinc-500">
+        <p className="text-right text-sm text-(--color-text-subtle)">
           © 2026 FitLog — Workout Library. Train hard, log honest.
         </p>
       </div>

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { useWorkout } from "@/context/WorkoutContextData";
 
 const Navbar = () => {
@@ -11,10 +10,12 @@ const Navbar = () => {
   const { plan, saved } = useWorkout();
 
   const navItemStyle =
-    "btn btn-ghost h-9 min-h-9 rounded-full px-5 text-sm font-medium leading-none  hover:bg-transparent hover:text-white hover:border-lime-400";
+    "btn btn-ghost h-9 min-h-9 rounded-full px-5 text-sm font-medium leading-none transition-colors";
 
   const activeNavStyle =
-    "bg-lime-400/20 text-lime-100 hover:border-lime-400 hover:text-lime-400";
+    "border border-(--color-primary)/30 bg-(--color-primary)/20 text-(--color-primary-light)";
+
+  const isMyPlan = pathname.startsWith("/my-plan");
 
   const navItems = (
     <>
@@ -22,7 +23,9 @@ const Navbar = () => {
         <Link
           href="/"
           className={`${navItemStyle} ${
-            pathname === "/" ? activeNavStyle : ""
+            pathname === "/"
+              ? activeNavStyle
+              : "text-(--color-text-muted) hover:border-(--color-primary)/30 hover:bg-transparent hover:text-(--color-text-primary)"
           }`}
         >
           Workouts
@@ -33,7 +36,9 @@ const Navbar = () => {
         <Link
           href="/my-plan/today-plan"
           className={`${navItemStyle} ${
-            pathname.startsWith("/my-plan") ? activeNavStyle : ""
+            isMyPlan
+              ? activeNavStyle
+              : "text-(--color-text-muted) hover:border-(--color-primary)/30 hover:bg-transparent hover:text-(--color-text-primary)"
           }`}
         >
           My Plan
@@ -43,17 +48,28 @@ const Navbar = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950 text-zinc-400 shadow-md">
+    <header
+      className="
+        sticky top-0 z-50
+        border-b border-(--navbar-border)
+        bg-(--navbar-background)
+        text-(--color-text-muted)
+        shadow-md
+      "
+    >
       <div className="navbar mx-auto min-h-22 max-w-375 px-4 sm:px-6 lg:px-8">
-
-        {/* Logo / Mobile Menu */}
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
               role="button"
               aria-label="Open menu"
-              className="btn btn-ghost btn-square text-zinc-400 hover:text-white"
+              className="
+                btn btn-ghost btn-square
+                text-(--color-text-muted)
+                hover:bg-transparent
+                hover:text-(--color-text-primary)
+              "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,16 +89,28 @@ const Navbar = () => {
 
             <ul
               tabIndex={-1}
-              className="menu dropdown-content z-50 mt-3 w-52 rounded-box border border-zinc-800 bg-zinc-950 p-2 text-zinc-400 shadow-xl"
+              className="
+                menu dropdown-content z-50 mt-3 w-52 rounded-box
+                border border-(--navbar-border)
+                bg-(--navbar-background)
+                p-2
+                text-(--color-text-muted)
+                shadow-xl
+              "
             >
               {navItems}
             </ul>
           </div>
 
-          {/* Logo */}
           <Link
             href="/"
-            className="btn btn-ghost gap-2 px-2 text-xl text-white hover:bg-transparent items-center"
+            className="
+              btn btn-ghost
+              items-center gap-2 px-2
+              text-xl
+              text-(--color-text-primary)
+              hover:bg-transparent
+            "
           >
             <Image
               src="/logo.png"
@@ -92,46 +120,74 @@ const Navbar = () => {
               priority
             />
 
-            <span className="font-oswald text-3xl font-bold tracking-wide text-white">
+            <span className="font-oswald text-3xl font-bold tracking-wide">
               FITLOG
             </span>
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal items-center gap-3 p-0">
             {navItems}
           </ul>
         </div>
 
-        {/* Right Side */}
         <div className="navbar-end gap-1 sm:gap-3">
-
-          {/* Plan */}
           <Link
             href="/my-plan/today-plan"
-            className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-zinc-400 transition-colors hover:text-white sm:px-3"
+            className="
+              flex items-center gap-2
+              px-2 py-2 sm:px-3
+              text-sm font-medium
+              text-(--color-text-muted)
+              transition-colors
+              hover:text-(--color-text-primary)
+            "
           >
             <span>Plan</span>
 
-            <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-lime-400 px-1.5 text-xs font-bold text-black">
+            <span
+              className="
+                flex h-6 min-w-6
+                items-center justify-center
+                rounded-full
+                bg-(--badge-background)
+                px-1.5
+                text-xs font-bold
+                text-(--badge-text)
+              "
+            >
               {plan.length}
             </span>
           </Link>
 
-          {/* Saved */}
           <Link
             href="/my-plan/saved"
-            className="flex items-center gap-2 px-2 py-2 text-sm font-medium text-zinc-400 transition-colors hover:text-white sm:px-3"
+            className="
+              flex items-center gap-2
+              px-2 py-2 sm:px-3
+              text-sm font-medium
+              text-(--color-text-muted)
+              transition-colors
+              hover:text-(--color-text-primary)
+            "
           >
             <span>Saved</span>
 
-            <span className="flex h-6 min-w-6 items-center justify-center rounded-full border border-zinc-700 px-1.5 text-xs text-zinc-400">
+            <span
+              className="
+                flex h-6 min-w-6
+                items-center justify-center
+                rounded-full
+                border border-(--color-border-light)
+                px-1.5
+                text-xs
+                text-(--color-text-muted)
+              "
+            >
               {saved.length}
             </span>
           </Link>
-
         </div>
       </div>
     </header>

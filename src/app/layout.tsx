@@ -4,6 +4,7 @@ import Navbar from "./components/shared/Navbar";
 import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "./components/shared/Footer";
+import ToastProvider from "./components/ToastProvider";
 
 // Font configuration
 export const inter = Inter({
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-zinc-950">
         <WorkoutProvider>
           <Navbar />
+          <ToastProvider />
           <div>{children}</div>
           <Footer />
         </WorkoutProvider>

@@ -1,25 +1,96 @@
 "use client";
-import { FiArrowLeft, FiBookmark, FiCalendar, FiCheck } from "react-icons/fi";
+
+import {
+  FiArrowLeft,
+  FiBookmark,
+  FiCalendar,
+  FiCheck,
+} from "react-icons/fi";
+
 import { useWorkout } from "@/context/WorkoutContextData";
+
 import { useParams } from "next/navigation";
+
 import Image from "next/image";
 import Link from "next/link";
-import { WorkoutType } from "@/types/workoutTypes";
 
+import { toast } from "react-toastify";
 
+import type { WorkoutType } from "@/types/workoutTypes";
 
 const WorkoutDetails = () => {
-  const { did } = useParams<{ cardid: string }>();
+  const { did } = useParams<{ did: string }>();
 
-  const { workouts, loading, error } = useWorkout();
- 
+  const {
+    workouts,
+    loading,
+    error,
+    setPlan,
+    setSaved,
+    plan,
+    saved,
+  } = useWorkout();
+
+  const workoutId = Number(did);
+
+  const isInPlan = plan.includes(workoutId);
+  const isSaved = saved.includes(workoutId);
+
+  /**
+   * ==========================
+   * Add Workout To Plan
+   * ==========================
+   */
+
+  const handleAddToPlan = () => {
+    if (isInPlan) {
+      toast.info("This workout is already in your plan.");
+      return;
+    }
+
+    setPlan((currentPlan) => [...currentPlan, workoutId]);
+
+    toast.success("Workout added to today's plan.");
+  };
+
+  /**
+   * ==========================
+   * Save Workout
+   * ==========================
+   */
+
+  const handleSaveWorkout = () => {
+    if (isSaved) {
+      toast.info("This workout is already saved.");
+      return;
+    }
+
+    setSaved((currentSaved) => [...currentSaved, workoutId]);
+
+    toast.success("Workout saved successfully.");
+  };
+
+  /**
+   * ==========================
+   * Loading State
+   * ==========================
+   */
+
   if (loading) {
     return (
       <main className="flex min-h-[calc(100vh-88px)] items-center justify-center px-4">
-        <p className="text-sm text-zinc-400">Loading workout...</p>
+        <p className="text-sm text-zinc-400">
+          Loading workout...
+        </p>
       </main>
     );
   }
+
+  /**
+   * ==========================
+   * Error State
+   * ==========================
+   */
 
   if (error) {
     return (
@@ -29,9 +100,16 @@ const WorkoutDetails = () => {
     );
   }
 
-  const workout = workouts.find((item): item is WorkoutType => String(item.id) === did);
+  /**
+   * ==========================
+   * Find Workout
+   * ==========================
+   */
 
-  console.log("Workout Details:", workout); // Log the workout details for debugging
+  const workout = workouts.find(
+    (item): item is WorkoutType =>
+      String(item.id) === did,
+  );
 
   if (!workout) {
     return (
@@ -54,17 +132,10 @@ const WorkoutDetails = () => {
   return (
     <main className="px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-300">
-        {/* Back */}
-        <Link
-          href="/"
-          className="mb-6 inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
-        >
-          <FiArrowLeft />
-          Back to workouts
-        </Link>
-
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
+
           {/* Image */}
+
           <div className="relative aspect-[0.82] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 lg:aspect-auto lg:min-h-152.5">
             <Image
               src={workout.image}
@@ -77,7 +148,9 @@ const WorkoutDetails = () => {
           </div>
 
           {/* Content */}
+
           <div className="flex flex-col">
+
             <h1 className="font-oswald text-4xl font-bold uppercase leading-none tracking-tight text-white sm:text-5xl">
               {workout.name}
             </h1>
@@ -87,6 +160,7 @@ const WorkoutDetails = () => {
             </p>
 
             {/* Muscle Groups */}
+
             <div className="mt-5 flex flex-wrap gap-2">
               {workout.muscleGroups.map((muscle) => (
                 <span
@@ -99,46 +173,109 @@ const WorkoutDetails = () => {
             </div>
 
             {/* Workout Details */}
+
             <div className="mt-5 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
-              <DetailRow label="Equipment" value={workout.equipment} />
+              <DetailRow
+                label="Equipment"
+                value={workout.equipment}
+              />
 
-              <DetailRow label="Difficulty" value={workout.difficulty} />
+              <DetailRow
+                label="Difficulty"
+                value={workout.difficulty}
+              />
 
-              <DetailRow label="Sets" value={String(workout.sets)} />
+              <DetailRow
+                label="Sets"
+                value={String(workout.sets)}
+              />
 
-              <DetailRow label="Reps" value={workout.reps} />
+              <DetailRow
+                label="Reps"
+                value={workout.reps}
+              />
 
-              <DetailRow label="Duration" value={`${workout.duration} min`} />
+              <DetailRow
+                label="Duration"
+                value={`${workout.duration} min`}
+              />
 
               <DetailRow
                 label="Calories"
                 value={`${workout.caloriesBurned} kcal`}
               />
 
-              <DetailRow label="Rating" value={String(workout.rating)} />
+              <DetailRow
+                label="Rating"
+                value={String(workout.rating)}
+              />
             </div>
 
             {/* Instructions */}
+
             <div className="mt-6">
               <h2 className="text-sm font-bold uppercase tracking-wide text-white">
                 Instructions
               </h2>
 
               <ol className="mt-4 space-y-3">
-                {workout.instructions.map((instruction, index) => (
-                  <li
-                    key={`${workout.id}-${index}`}
-                    className="flex gap-3 text-sm leading-6 text-zinc-400"
-                  >
-                    <span className="shrink-0 text-zinc-500">{index + 1}.</span>
+                {workout.instructions.map(
+                  (instruction, index) => (
+                    <li
+                      key={`${workout.id}-${index}`}
+                      className="flex gap-3 text-sm leading-6 text-zinc-400"
+                    >
+                      <span className="shrink-0 text-zinc-500">
+                        {index + 1}.
+                      </span>
 
-                    <span>{instruction}</span>
-                  </li>
-                ))}
+                      <span>{instruction}</span>
+                    </li>
+                  ),
+                )}
               </ol>
             </div>
 
-            
+            {/* Actions */}
+
+            <div className="mt-7 flex flex-wrap gap-3">
+
+              {/* Add To Plan */}
+
+              <button
+                type="button"
+                onClick={handleAddToPlan}
+                disabled={isInPlan}
+                className={`inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-semibold transition ${
+                  isInPlan
+                    ? "cursor-not-allowed bg-zinc-700 text-zinc-400"
+                    : "bg-lime-400 text-black hover:bg-lime-300"
+                }`}
+              >
+                {isInPlan ? <FiCheck /> : <FiCalendar />}
+
+                {isInPlan
+                  ? "Already in plan"
+                  : "Add to today's plan"}
+              </button>
+
+              {/* Save Workout */}
+
+              <button
+                type="button"
+                onClick={handleSaveWorkout}
+                disabled={isSaved}
+                className={`inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-semibold transition ${
+                  isSaved
+                    ? "cursor-not-allowed bg-zinc-700 text-zinc-400"
+                    : "bg-zinc-800 text-white hover:bg-zinc-700"
+                }`}
+              >
+                {isSaved ? <FiCheck /> : <FiBookmark />}
+
+                {isSaved ? "Already saved" : "Save workout"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -157,14 +294,19 @@ interface DetailRowProps {
   value: string;
 }
 
-const DetailRow = ({ label, value }: DetailRowProps) => {
+const DetailRow = ({
+  label,
+  value,
+}: DetailRowProps) => {
   return (
     <div className="flex min-h-11.75 items-center justify-between border-b border-zinc-800 px-4 last:border-b-0">
       <span className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
         {label}
       </span>
 
-      <span className="text-sm text-zinc-200">{value}</span>
+      <span className="text-sm text-zinc-200">
+        {value}
+      </span>
     </div>
   );
 };
